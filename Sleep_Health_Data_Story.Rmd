@@ -1,0 +1,232 @@
+---
+title: "Sleep Health Analytics | EDA & Statistical Modeling"
+author: "Abubakar Abdallah"
+date: "2025-08-18"
+output: html_document
+description: "Investigating the Relationship Between Sleep Disorders and Lifestyle Factors"
+---
+
+# ----------------------------
+
+# BASIC SETUP & DATA LOADING
+
+# ----------------------------
+
+## Load library
+
+```         
+library(tidyverse)
+```
+
+## Data loading path
+
+```         
+sleep_data <- read.csv("C:/Users/LENOVO/Documents/Data_Analytics/DATASETS-ARCHIVES/Sleep_health_data.csv")
+```
+
+## Data checks
+
+```         
+head(sleep_data)
+str(sleep_data) 
+summary(sleep_data$Age) 
+colSums(is.na(sleep_data)
+```
+
+# ----------------------------
+
+# SIMPLE DATA CLEANING
+
+# ----------------------------
+
+### Blood pressure column cleaning
+
+```         
+sleep_data <- sleep_data %\>% separate(Blood.Pressure, into = c("Systolic", "Diastolic"), sep = "/") %\>% mutate( Systolic = as.numeric(Systolic), Diastolic = as.numeric(Diastolic) )
+```
+
+why this matters: "Blood pressure analysis was impossible before cleaning"
+
+# ----------------------------
+
+# EDA - Visualizations
+
+# ----------------------------
+
+## Q1: Do people with sleep disorders get less sleep?
+
+### Boxplot - Sleep Duration by Disorder
+
+```         
+ggplot(sleep_data, aes(x = Sleep.Disorder, y = Sleep.Duration)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Sleep Duration by Disorder Status",
+       x = "Sleep Disorder",
+       y = "Hours of Sleep")
+```
+
+## Q2: Is stress linked to lower sleep quality?
+
+### Stress vs Sleep Quality
+
+```         
+ggplot(sleep_data, aes(x = Stress.Level, y = Quality.of.Sleep)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Stress vs. Sleep Quality",
+       subtitle = "Higher stress correlates with poorer sleep")
+```
+
+## Q3: How does the distribution of sleep disorders differ among various occupations?
+
+### Custom Plot - Occupation Analysis
+
+```         
+sleep_data %>%
+  group_by(Occupation, Sleep.Disorder) %>%
+  summarise(Count = n()) %>%
+  ggplot(aes(x = Occupation, y = Count, fill = Sleep.Disorder)) +
+  geom_col(position = "fill") +
+  coord_flip() +
+  labs(title = "Sleep Disorders by Occupation",
+       subtitle = "Sales Representatives and nurses have higher rates of sleep apnea",
+       y = "Proportion") +
+  theme_minimal()
+```
+
+# -------------------------------------------
+
+# STATISTICAL TESTS (To validate hypotheses)
+
+# -------------------------------------------
+
+## T-test: Do people with sleep apnea have higher BMI?
+
+```         
+apnea_data <- sleep_data %>% 
+  filter(Sleep.Disorder %in% c("None", "Sleep Apnea")) %>%
+  mutate(Has_Apnea = Sleep.Disorder == "Sleep Apnea")
+
+t.test(BMI ~ Has_Apnea, data = apnea_data)
+```
+
+#### Conclusion: "People with sleep apnea have significantly higher BMI (p \< 0.05)"
+
+### Shows the relationship above visually
+
+```         
+ggplot(apnea_data, aes(x = BMI.Category, fill = Has_Apnea)) +
+  geom_bar(position = "fill") +
+  labs(y = "Proportion with Sleep Apnea")
+```
+
+## Fisher's test - Is there a significant association between BMI category and sleep apnea status?
+
+```         
+fisher.test(table(apnea_data$BMI.Category, apnea_data$Has_Apnea))
+```
+
+```         
+Null Hypothesis (H₀)
+"There is no association between BMI category and sleep apnea status in the population"
+(In statistical terms: BMI category and sleep apnea are independent variables)
+
+Alternative Hypothesis (H₁)
+"There is a significant association between BMI category and sleep apnea status"
+(In statistical terms: The probability of having sleep apnea depends on BMI category)
+
+CONCLUSION: You reject Ho and conclude that there is a significant association between BMI category and sleep apnea status.
+```
+
+### Visualization: Apnea prevalence by BMI category
+
+```         
+library(ggplot2)
+apnea_data %>%
+  group_by(BMI.Category, Has_Apnea) %>%
+  summarise(Count = n()) %>%
+  mutate(Proportion = Count / sum(Count)) %>%
+  ggplot(aes(x = BMI.Category, y = Proportion, fill = Has_Apnea)) +
+  geom_col() +
+  labs(title = "Sleep Apnea Prevalence by BMI Category",
+       x = "BMI Category",
+       y = "Proportion",
+       fill = "Has Sleep Apnea") +
+  theme_minimal()
+```
+
+# ----------------------------
+
+# PREDICTIVE MODEL
+
+# ----------------------------
+
+## Simple logistic regression
+
+```         
+model <- glm(Sleep.Disorder == "Insomnia" ~ Stress.Level + Physical.Activity.Level,
+             data = sleep_data, family = "binomial")
+```
+
+```         
+summary(model)
+```
+
+Interpretation: "Stress increases insomnia risk, while physical activity reduces it"
+
+# ----------------------
+
+# BP CALCULATIONS
+
+# ----------------------
+
+### Find average systolic pressure
+
+```         
+mean(sleep_data$Systolic)
+```
+
+### Count hypertensive patients (systolic \> 140)
+
+```         
+sum(sleep_data$Systolic > 140)
+```
+
+### Find average diastolic pressure
+
+```         
+mean(sleep_data\$Diastolic)
+```
+
+### Count hypotensive patients (diastolic \< 60)
+
+```         
+sum(sleep_data$Diastolic < 60)
+```
+
+### Calculate percentage of hypertensive patients
+
+```         
+hypertensive_count <- sum(sleep_data$Systolic > 140)
+total_patients <- nrow(sleep_data)
+percentage_hypertensive <- (hypertensive_count / total_patients) * 100
+percentage_hypertensive
+```
+
+### Find maximum systolic pressure
+
+```         
+max_systolic <- max(sleep_data$Systolic, na.rm = TRUE)
+```
+
+### Find maximum diastolic pressure
+
+```         
+max_diastolic <- max(sleep_data$Diastolic, na.rm = TRUE)
+```
+
+### Count patients with normal BP (Systolic \< 120 and Diastolic \< 80)
+
+```         
+sum(sleep_data$Systolic < 120 & sleep_data$Diastolic < 80)
+```
