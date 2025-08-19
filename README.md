@@ -38,9 +38,7 @@ Sleep-Health-Analysis/
 ├── data/
 │   └── Sleep_health_and_lifestyle_dataset.csv
 ├── scripts/
-│   └── sleep_health_analysis.R
-├── reports/
-│   └── Sleep_Health_Data_Story.Rmd
+│   └── sleep_health_Data_Story.Rmd
 ├── figures/
 │   ├── Rplot1_sleep_duration_by_disorder_status.png
 │   ├── Rplot2_stress_vs_sleep_quality.png
