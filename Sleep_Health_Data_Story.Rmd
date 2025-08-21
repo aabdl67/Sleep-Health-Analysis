@@ -126,7 +126,6 @@ ggplot(apnea_data, aes(x = BMI.Category, fill = Has_Apnea)) +
 fisher.test(table(apnea_data$BMI.Category, apnea_data$Has_Apnea))
 ```
 
-```         
 Null Hypothesis (H₀)
 "There is no association between BMI category and sleep apnea status in the population"
 (In statistical terms: BMI category and sleep apnea are independent variables)
@@ -136,7 +135,7 @@ Alternative Hypothesis (H₁)
 (In statistical terms: The probability of having sleep apnea depends on BMI category)
 
 CONCLUSION: You reject Ho and conclude that there is a significant association between BMI category and sleep apnea status.
-```
+
 
 ### Visualization: Apnea prevalence by BMI category
 
