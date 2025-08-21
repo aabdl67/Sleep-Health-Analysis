@@ -212,16 +212,16 @@ percentage_hypertensive <- (hypertensive_count / total_patients) * 100
 percentage_hypertensive
 ```
 
-### Find maximum systolic pressure
+### Find minimum and maximum systolic pressure
 
 ```         
-max_systolic <- max(sleep_data$Systolic, na.rm = TRUE)
+range(sleep_data$Systolic, na.rm = TRUE)
 ```
 
-### Find maximum diastolic pressure
+### Find minimum and maximum diastolic pressure
 
 ```         
-max_diastolic <- max(sleep_data$Diastolic, na.rm = TRUE)
+range(sleep_data$Diastolic, na.rm = TRUE)
 ```
 
 ### Count patients with normal BP (Systolic \< 120 and Diastolic \< 80)
