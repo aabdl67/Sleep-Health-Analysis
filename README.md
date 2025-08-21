@@ -35,17 +35,17 @@ Comprehensive analysis of sleep health data examining relationships between slee
 
 ```         
 Sleep-Health-Analysis/
-├── Sleep_health_and_lifestyle_dataset.csv 
-├── Sleep_Health_Data_Story.Rmd
-├── Key_findings.md
+├── Sleep_health_and_lifestyle_dataset.csv  # Raw source data
+├── Sleep_Health_Data_Story.Rmd             # Main data analysis and storytelling script (R Markdown)
+├── Key_findings.md                         # Summary of analysis results and conclusions
 ├── Viz_Plots/
 │   ├── Rplot1_sleep_duration_by_disorder_status.png
 │   ├── Rplot2_stress_vs_sleep_quality.png
 │   ├── Rplot3_sleep_disorders_by_occupation.png
 │   └── Rplot4_sleep_apnea_vs_BMI_category.png
-├── README.md
-├── .gitignore
-└── Sleep-Health-Analysis.Rproj
+├── README.md                               # Project overview and documentation
+├── .gitignore                              # Git exclusion rules
+└── Sleep-Health-Analysis.Rproj             # RStudio project configuration
 ```
 
 ## Data Source
