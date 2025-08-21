@@ -35,11 +35,10 @@ Comprehensive analysis of sleep health data examining relationships between slee
 
 ```         
 Sleep-Health-Analysis/
-├── data/
-│   └── Sleep_health_and_lifestyle_dataset.csv
-├── scripts/
-│   └── sleep_health_Data_Story.Rmd
-├── figures/
+├── Sleep_health_and_lifestyle_dataset.csv 
+├── Sleep_Health_Data_Story.Rmd
+├── Key_findings.md
+├── Viz_Plots/
 │   ├── Rplot1_sleep_duration_by_disorder_status.png
 │   ├── Rplot2_stress_vs_sleep_quality.png
 │   ├── Rplot3_sleep_disorders_by_occupation.png
