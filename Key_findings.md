@@ -20,6 +20,7 @@ Initial analysis revealed important baseline health statistics for the group:
 **Details:** The boxplot clearly shows that people with no sleep disorder enjoy the highest median sleep duration (approximately 7-8 hours). Those with Sleep Apnea have a moderately reduced median duration (around 6.5-7 hours), while individuals with Insomnia have the lowest median sleep duration (approximately 5.5-6 hours). This demonstrates a clear link between disordered sleep and reduced sleep quantity.
 
 **Visual Evidence:**
+
 ![Sleep Duration by Disorder Status](Viz_Plots/Rplot1_sleep%20duration%20by%20disorder%20status.png)
 
 ## 2. Stress vs. Sleep Quality Relationship
@@ -28,6 +29,7 @@ Initial analysis revealed important baseline health statistics for the group:
 **Details:** The scatter plot reveals a clear downward trend: as self-reported stress levels increase, reported sleep quality scores consistently decrease. Individuals with the lowest stress (scores 3-5) report high sleep quality (8-9), while those with the highest stress (scores 8-9) report poor sleep quality (4-6). This is one of the strongest relationships in the dataset.
 
 **Visual Evidence:**
+
 ![Stress vs. Sleep Quality](Viz_Plots/Rplot2_stress%20vs.%20sleep%20quality.png)
 
 ## 3. Occupation-Based Sleep Disorder Prevalence
@@ -36,6 +38,7 @@ Initial analysis revealed important baseline health statistics for the group:
 **Details:** Sales Representatives and Nurses have the highest proportion of Sleep Apnea cases. Lawyers and Engineers show a higher prevalence of Insomnia. Occupations like Teacher and Accountant appear to have a much lower overall prevalence of sleep disorders. This suggests that job-related factors like stress, shift work, or sedentary behavior may be significant contributors to sleep health.
 
 **Visual Evidence:**
+
 ![Sleep Disorders by Occupation](Viz_Plots/Rplot3_sleep%20disorders%20by%20occupation.png)
 
 ## 4. Sleep Apnea and BMI Category
@@ -44,6 +47,7 @@ Initial analysis revealed important baseline health statistics for the group:
 **Details:** The stacked bar chart provides striking evidence: the proportion of individuals with Sleep Apnea (TRUE) is vastly higher in the "Obese" BMI category compared to all others. The "Normal Weight" and "Overweight" categories consist almost entirely of individuals without Sleep Apnea. This confirms that obesity is the single strongest demographic predictor for this disorder in our sample.
 
 **Visual Evidence:**
+
 ![Sleep Apnea vs. BMI Category](Viz_Plots/Rplot4_sleep%20apnea%20vs.%20BMI%20category.png)
 
 ## 5. Predictive Model for Insomnia Risk
